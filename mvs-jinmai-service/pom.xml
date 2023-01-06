@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.mvs</groupId>
+        <artifactId>mvs-jinmai-mall-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>mvs-jinmai-service</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>mvs-jinmai-oms</module>
+        <module>mvs-jinmai-pms</module>
+        <module>mvs-jinmai-ums</module>
+        <module>mvs-jinmai-pay</module>
+        <module>mvs-jinmai-cart</module>
+        <module>mvs-jinmai-dictionary</module>
+        <module>mvs-jinmai-sms</module>
+        <module>mvs-jinmai-cms</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+</project>

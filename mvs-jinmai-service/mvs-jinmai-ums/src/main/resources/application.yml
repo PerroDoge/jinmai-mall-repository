@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/jinmai-mall?useSSL=false&useEncoding=true&characterUnicode=UTF-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+mybatis:
+  type-aliases-package: com.mvs.jinmai.ums.entity
+  mapper-locations: classpath:com/mvs/jinmai/*.xml
