@@ -1,7 +1,9 @@
-package com.mvs.jinmai.ums.service;
+package com.mvs.jinmai.service;
 
-import com.mvs.jinmai.ums.entity.UmsMember;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.mvs.jinmai.entity.UmsMember;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-01-05
  */
 public interface UmsMemberService extends IService<UmsMember> {
+    List<UmsMember> selectAll();
 
+    int register(UmsMember umsMember);
 }

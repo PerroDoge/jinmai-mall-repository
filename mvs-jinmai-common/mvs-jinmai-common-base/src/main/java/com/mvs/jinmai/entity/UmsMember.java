@@ -1,14 +1,14 @@
-package com.mvs.jinmai.ums.entity;
+package com.mvs.jinmai.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -46,9 +46,10 @@ public class UmsMember implements Serializable {
     private String note;
 
     @ApiModelProperty("创建时间")
-    private LocalDateTime createTime;
-
-    private LocalDateTime updateTime;
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
 
     @ApiModelProperty("最后登录时间")
     private LocalDateTime loginTime;

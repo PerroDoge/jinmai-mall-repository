@@ -1,8 +1,10 @@
 package com.mvs.jinmai.ums.mapper;
 
-import com.mvs.jinmai.ums.entity.UmsMember;
+import com.mvs.jinmai.entity.UmsMember;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +16,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UmsMemberMapper extends BaseMapper<UmsMember> {
-
+    List<UmsMember> selectAll();
 }

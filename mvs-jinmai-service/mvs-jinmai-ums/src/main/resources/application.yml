@@ -1,9 +1,22 @@
+server:
+  port: 9000
 spring:
+  application:
+    name: mvs-jinmai-ums-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
   datasource:
     url: jdbc:mysql://localhost:3306/jinmai-mall?useSSL=false&useEncoding=true&characterUnicode=UTF-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root
 mybatis:
-  type-aliases-package: com.mvs.jinmai.ums.entity
-  mapper-locations: classpath:com/mvs/jinmai/*.xml
+  type-aliases-package: com.mvs.jinmai.entity
+  mapper-locations: classpath:com/mvs/jinmai/ums/mapper/*.xml
+management:
+  endpoints:
+    web:
+      enposure:
+        include: "*"

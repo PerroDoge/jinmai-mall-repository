@@ -1,11 +1,10 @@
-package com.mvs.jinmai.ums.controller;
+package com.mvs.jinmai.controller;
 
 import com.mvs.jinmai.entity.UmsMember;
-import com.mvs.jinmai.service.UmsMemberService;
+import com.mvs.jinmai.feignClient.UmsFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -23,19 +22,20 @@ import java.util.List;
 public class UmsMemberController {
 
     @Autowired
-    UmsMemberService umsMemberService;
+    UmsFeignClient umsFeignClient;
 
     @RequestMapping("/selectAll")
     @ResponseBody
     public List<UmsMember> selectAll() {
 
-        return umsMemberService.selectAll();
+        return umsFeignClient.selectAll();
     }
 
     @RequestMapping("/register")
     @ResponseBody
-    public int register(@RequestBody UmsMember umsMember) {
-
-        return umsMemberService.register(umsMember);
+    public int register(UmsMember umsMember) {
+        UmsMember umsMember1 = new UmsMember();
+        umsMember1.setNickName("gouor");
+        return umsFeignClient.register(umsMember1);
     }
 }
