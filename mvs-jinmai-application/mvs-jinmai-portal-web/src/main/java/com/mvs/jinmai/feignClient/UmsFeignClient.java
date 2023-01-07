@@ -3,6 +3,7 @@ package com.mvs.jinmai.feignClient;
 import com.mvs.jinmai.entity.UmsMember;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,7 +17,7 @@ public interface UmsFeignClient {
     @RequestMapping("/umsMember/selectAll")
     public List<UmsMember> selectAll();
 
-    @RequestMapping("/umsMember/register")
+    @PostMapping("/umsMember/register")
     int register(@RequestBody UmsMember umsMember);
 
     @RequestMapping("/umsMember/selectByUsername")

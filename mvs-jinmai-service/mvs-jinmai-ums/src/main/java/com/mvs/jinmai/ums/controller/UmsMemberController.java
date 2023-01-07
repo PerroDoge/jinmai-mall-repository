@@ -3,6 +3,7 @@ package com.mvs.jinmai.ums.controller;
 import com.mvs.jinmai.entity.UmsMember;
 import com.mvs.jinmai.service.UmsMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
@@ -32,10 +33,10 @@ public class UmsMemberController {
         return umsMemberService.selectAll();
     }
 
-    @RequestMapping("/register")
+    @PostMapping("/register")
     @ResponseBody
     public int register(@RequestBody UmsMember umsMember) {
-
+        System.out.println("Hello Controller!");
         return umsMemberService.register(umsMember);
     }
 

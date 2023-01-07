@@ -4,6 +4,7 @@ import com.mvs.jinmai.entity.UmsMember;
 import com.mvs.jinmai.entity.dto.UmsMemberLoginDTO;
 import com.mvs.jinmai.entity.dto.UmsMemberRegisterDTO;
 import com.mvs.jinmai.feignClient.UmsFeignClient;
+import com.mvs.jinmai.result.ResultWrapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -31,29 +33,31 @@ public class UmsMemberController {
 
     @RequestMapping("/selectAll")
     @ResponseBody
-    public List<UmsMember> selectAll() {
-
-        return umsFeignClient.selectAll();
+    public ResultWrapper<List<UmsMember>> selectAll() {
+        List<UmsMember> res = umsFeignClient.selectAll();
+        return ResultWrapper.getSuccessBuilder().data(res).build();
     }
 
     @PostMapping("/register")
     @ResponseBody
-    public int register(@RequestBody UmsMemberRegisterDTO umsMemberRegisterDTO) {
-        System.out.println(umsMemberRegisterDTO);
+    public ResultWrapper<UmsMember> register(@RequestBody @Valid UmsMemberRegisterDTO umsMemberRegisterDTO) {
+        System.out.println("[hello, I'm here!]: " + umsMemberRegisterDTO);
         UmsMember umsMember = new UmsMember();
         BeanUtils.copyProperties(umsMemberRegisterDTO, umsMember);
-        return umsFeignClient.register(umsMember);
+        int result = umsFeignClient.register(umsMember);
+        if(result == 0) return ResultWrapper.getFailBuilder().msg("注册失败").build();
+        return ResultWrapper.getSuccessBuilder().msg("注册成功").build();
     }
 
     @PostMapping("/login")
     @ResponseBody
-    public String login(@RequestBody UmsMemberLoginDTO umsMemberLoginDTO) {
+    public ResultWrapper<UmsMember> login(@RequestBody UmsMemberLoginDTO umsMemberLoginDTO) {
         UmsMember umsMember = new UmsMember();
         BeanUtils.copyProperties(umsMemberLoginDTO, umsMember);
         UmsMember result = umsFeignClient.login(umsMember);
         if(null == result) {
-            return "用户或密码错误";
+            return ResultWrapper.getFailBuilder().msg("登录失败").build();
         }
-        return "登录成功";
+        return ResultWrapper.getSuccessBuilder().msg("登录成功").data(result).build();
     }
 }

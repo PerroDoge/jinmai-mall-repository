@@ -7,6 +7,9 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
 management:
   endpoints:
     web:
