@@ -5,4 +5,7 @@
     <select id="selectAll" resultType="com.mvs.jinmai.entity.UmsMember">
         SELECT * FROM ums_member
     </select>
+    <select id="selectByUsername" parameterType="com.mvs.jinmai.entity.UmsMember" resultType="com.mvs.jinmai.entity.UmsMember">
+        SELECT * FROM ums_member WHERE username = #{username}
+    </select>
 </mapper>

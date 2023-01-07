@@ -38,4 +38,10 @@ public class UmsMemberController {
 
         return umsMemberService.register(umsMember);
     }
+
+    @RequestMapping("/selectByUsername")
+    @ResponseBody
+    public UmsMember selectByUsername(@RequestBody UmsMember umsMember) {
+        return umsMemberService.selectByUserName(umsMember);
+    }
 }

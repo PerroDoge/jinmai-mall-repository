@@ -17,4 +17,6 @@ public interface UmsMemberService extends IService<UmsMember> {
     List<UmsMember> selectAll();
 
     int register(UmsMember umsMember);
+
+    UmsMember selectByUserName(UmsMember umsMember);
 }

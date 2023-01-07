@@ -18,4 +18,7 @@ public interface UmsFeignClient {
 
     @RequestMapping("/umsMember/register")
     int register(@RequestBody UmsMember umsMember);
+
+    @RequestMapping("/umsMember/selectByUsername")
+    UmsMember login(@RequestBody UmsMember umsMember);
 }
