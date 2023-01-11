@@ -1,6 +1,7 @@
 package com.mvs.jinmai.ums.controller;
 
 import com.mvs.jinmai.entity.UmsMember;
+import com.mvs.jinmai.result.ResultWrapper;
 import com.mvs.jinmai.service.UmsMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,21 +29,28 @@ public class UmsMemberController {
 
     @RequestMapping("/selectAll")
     @ResponseBody
-    public List<UmsMember> selectAll() {
+    public ResultWrapper<List<UmsMember>> selectAll() {
 
         return umsMemberService.selectAll();
     }
 
     @PostMapping("/register")
     @ResponseBody
-    public int register(@RequestBody UmsMember umsMember) {
+    public ResultWrapper register(@RequestBody UmsMember umsMember) {
         System.out.println("Hello Controller!");
         return umsMemberService.register(umsMember);
     }
 
     @RequestMapping("/selectByUsername")
     @ResponseBody
-    public UmsMember selectByUsername(@RequestBody UmsMember umsMember) {
+    public ResultWrapper selectByUsername(@RequestBody UmsMember umsMember) {
         return umsMemberService.selectByUserName(umsMember);
+    }
+
+    @RequestMapping("/updateByUsername")
+    @ResponseBody
+    public ResultWrapper updateByUsername(@RequestBody UmsMember umsMember) {
+        System.out.println("[updateByUsername]:" + umsMember.getUsername());
+        return umsMemberService.updateByUsername(umsMember);
     }
 }

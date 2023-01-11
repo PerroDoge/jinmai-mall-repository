@@ -19,4 +19,6 @@ public interface UmsMemberMapper extends BaseMapper<UmsMember> {
     List<UmsMember> selectAll();
 
     UmsMember selectByUsername(UmsMember umsMember);
+
+    int updateByUsername(UmsMember umsMember);
 }

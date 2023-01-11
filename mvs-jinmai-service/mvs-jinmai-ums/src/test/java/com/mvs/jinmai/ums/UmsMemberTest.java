@@ -1,6 +1,7 @@
 package com.mvs.jinmai.ums;
 
 import com.mvs.jinmai.entity.UmsMember;
+import com.mvs.jinmai.result.ResultWrapper;
 import com.mvs.jinmai.service.UmsMemberService;
 import com.mvs.jinmai.ums.mapper.UmsMemberMapper;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ public class UmsMemberTest {
 
     @Test
     public void selectAllTest() {
-        List<UmsMember> list = umsMemberService.selectAll();
-        System.out.println(list);
+        ResultWrapper<List<UmsMember>> res = umsMemberService.selectAll();
+        System.out.println(res.getData());
     }
 }

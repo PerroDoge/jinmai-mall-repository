@@ -1,8 +1,10 @@
 package com.mvs.jinmai.controller;
 
+import com.mvs.jinmai.annotation.Token;
 import com.mvs.jinmai.entity.UmsMember;
 import com.mvs.jinmai.entity.dto.UmsMemberLoginDTO;
 import com.mvs.jinmai.entity.dto.UmsMemberRegisterDTO;
+import com.mvs.jinmai.entity.dto.UmsMemberUpdateDTO;
 import com.mvs.jinmai.feignClient.UmsFeignClient;
 import com.mvs.jinmai.result.ResultWrapper;
 import org.springframework.beans.BeanUtils;
@@ -34,8 +36,8 @@ public class UmsMemberController {
     @RequestMapping("/selectAll")
     @ResponseBody
     public ResultWrapper<List<UmsMember>> selectAll() {
-        List<UmsMember> res = umsFeignClient.selectAll();
-        return ResultWrapper.getSuccessBuilder().data(res).build();
+
+        return umsFeignClient.selectAll();
     }
 
     @PostMapping("/register")
@@ -44,9 +46,7 @@ public class UmsMemberController {
         System.out.println("[hello, I'm here!]: " + umsMemberRegisterDTO);
         UmsMember umsMember = new UmsMember();
         BeanUtils.copyProperties(umsMemberRegisterDTO, umsMember);
-        int result = umsFeignClient.register(umsMember);
-        if(result == 0) return ResultWrapper.getFailBuilder().msg("注册失败").build();
-        return ResultWrapper.getSuccessBuilder().msg("注册成功").build();
+        return umsFeignClient.register(umsMember);
     }
 
     @PostMapping("/login")
@@ -54,10 +54,16 @@ public class UmsMemberController {
     public ResultWrapper<UmsMember> login(@RequestBody UmsMemberLoginDTO umsMemberLoginDTO) {
         UmsMember umsMember = new UmsMember();
         BeanUtils.copyProperties(umsMemberLoginDTO, umsMember);
-        UmsMember result = umsFeignClient.login(umsMember);
-        if(null == result) {
-            return ResultWrapper.getFailBuilder().msg("登录失败").build();
-        }
-        return ResultWrapper.getSuccessBuilder().msg("登录成功").data(result).build();
+        return umsFeignClient.login(umsMember);
+    }
+
+    @RequestMapping("/edit")
+    @ResponseBody
+    @Token
+    public ResultWrapper edit(@RequestBody UmsMemberUpdateDTO umsMemberUpdateDTO) {
+        UmsMember umsMember = new UmsMember();
+        BeanUtils.copyProperties(umsMemberUpdateDTO, umsMember);
+        System.out.println("[edit]:" + umsMember.getUsername());
+        return umsFeignClient.edit(umsMember);
     }
 }

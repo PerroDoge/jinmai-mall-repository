@@ -8,8 +8,8 @@ spring:
       discovery:
         server-addr: localhost:8848
 ribbon:
-  ReadTimeout: 5000
-  ConnectTimeout: 5000
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
 management:
   endpoints:
     web:

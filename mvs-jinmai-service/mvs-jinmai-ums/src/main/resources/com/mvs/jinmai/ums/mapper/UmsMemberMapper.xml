@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mvs.jinmai.ums.mapper.UmsMemberMapper">
-
     <select id="selectAll" resultType="com.mvs.jinmai.entity.UmsMember">
         SELECT * FROM ums_member
     </select>
     <select id="selectByUsername" parameterType="com.mvs.jinmai.entity.UmsMember" resultType="com.mvs.jinmai.entity.UmsMember">
         SELECT * FROM ums_member WHERE username = #{username}
     </select>
+    <update id="updateByUsername">
+        UPDATE ums_member
+        <set>
+            <if test="password != null">password = #{password}</if>
+            <if test="icon != null"> icon = #{icon}</if>
+            <if test="email != null"> email = #{email}</if>
+            <if test="nickName != null"> nick_name = #{nickName}</if>
+            <if test="note != null">note = #{note}</if>
+            <if test="loginTime != null">login_time = #{loginTime}</if>
+            <if test="status != null">status = #{status}</if>
+        </set>
+        WHERE username = #{username}
+    </update>
 </mapper>
