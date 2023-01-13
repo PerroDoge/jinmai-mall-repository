@@ -43,11 +43,13 @@ public class ImageCode {
         // 生成随机数
         Random random = new Random();
         graphics.setColor(new Color(225, 255, 255));
+        StringBuilder stringBuilder = new StringBuilder();
         for(int i = 0; i < 6; i++) {
             String s = String.valueOf(random.nextInt(10));
-            code += s;
+            stringBuilder.append(s);
             graphics.drawString(s, ((width / 6 )* i), 40);
         }
+        code = stringBuilder.toString();
 
         // 收笔
         graphics.dispose();
