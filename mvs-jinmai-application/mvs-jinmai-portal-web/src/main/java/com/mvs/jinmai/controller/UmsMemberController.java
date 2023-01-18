@@ -1,10 +1,12 @@
 package com.mvs.jinmai.controller;
 
 import com.mvs.jinmai.annotation.Token;
+import com.mvs.jinmai.code.MyKaptcha;
 import com.mvs.jinmai.entity.UmsMember;
 import com.mvs.jinmai.entity.dto.UmsMemberLoginDTO;
 import com.mvs.jinmai.entity.dto.UmsMemberRegisterDTO;
 import com.mvs.jinmai.entity.dto.UmsMemberUpdateDTO;
+import com.mvs.jinmai.exception.NullVerifyCodeException;
 import com.mvs.jinmai.feignClient.UmsFeignClient;
 import com.mvs.jinmai.result.ResultWrapper;
 import org.springframework.beans.BeanUtils;
@@ -33,6 +35,8 @@ public class UmsMemberController {
     @Autowired
     UmsFeignClient umsFeignClient;
 
+    @Autowired
+    MyKaptcha kaptcha;
     @RequestMapping("/selectAll")
     @ResponseBody
     public ResultWrapper<List<UmsMember>> selectAll() {
@@ -43,7 +47,12 @@ public class UmsMemberController {
     @PostMapping("/register")
     @ResponseBody
     public ResultWrapper<UmsMember> register(@RequestBody @Valid UmsMemberRegisterDTO umsMemberRegisterDTO) {
-        System.out.println("[hello, I'm here!]: " + umsMemberRegisterDTO);
+        System.out.println("Im in here!");
+        if (null == umsMemberRegisterDTO.getVerifyCode()) {
+            throw new NullVerifyCodeException();
+        }
+        kaptcha.validate(umsMemberRegisterDTO.getVerifyCode());
+        System.out.println("验证完毕");
         UmsMember umsMember = new UmsMember();
         BeanUtils.copyProperties(umsMemberRegisterDTO, umsMember);
         return umsFeignClient.register(umsMember);

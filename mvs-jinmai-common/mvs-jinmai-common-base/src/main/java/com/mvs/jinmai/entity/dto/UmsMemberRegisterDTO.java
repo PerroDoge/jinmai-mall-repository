@@ -21,4 +21,6 @@ public class UmsMemberRegisterDTO {
 
 
     private String nickName;
+
+    private String verifyCode;
 }

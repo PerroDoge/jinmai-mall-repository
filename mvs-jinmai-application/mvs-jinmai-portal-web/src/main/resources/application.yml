@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: mvs-jinmai-manager-web
+  redis:
+    host: 192.168.50.59
   cloud:
     nacos:
       discovery:
