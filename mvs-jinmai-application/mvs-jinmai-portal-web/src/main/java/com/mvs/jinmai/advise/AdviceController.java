@@ -2,6 +2,7 @@ package com.mvs.jinmai.advise;
 
 import com.baomidou.kaptcha.exception.KaptchaException;
 import com.mvs.jinmai.exception.NullVerifyCodeException;
+import com.mvs.jinmai.exception.SignAuthErrorException;
 import com.mvs.jinmai.exception.ValidateFailedException;
 import com.mvs.jinmai.result.ResultWrapper;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,5 +20,10 @@ public class AdviceController {
             return ResultWrapper.getFailBuilder().code(406).msg("验证失败，请重试").build();
         }
         return ResultWrapper.getFailBuilder().code(404).msg("验证码异常").build();
+    }
+
+    @ExceptionHandler(SignAuthErrorException.class)
+    public ResultWrapper SignAuthErrorHandler(Exception e) {
+        return ResultWrapper.getFailBuilder().code(999).msg(e.getMessage()).build();
     }
 }
